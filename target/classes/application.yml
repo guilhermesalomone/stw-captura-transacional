@@ -1,0 +1,13 @@
+
+######################################################
+#
+# Configuracao do Inicializador de Threads task-executo
+#
+#
+#
+#####################################################
+task-executor:
+    core-pool-size: 10
+    max-pool-size: 100
+    queue-capacity: 100
+
