@@ -2,6 +2,8 @@ package br.com.stw.captura.transacional.domain;
 
 import javax.annotation.Generated;
 
+import org.springframework.http.HttpStatus;
+
 /**
  * 
  * @author Guilherme.Salomone
@@ -9,9 +11,12 @@ import javax.annotation.Generated;
  */
 public class StwMonitorRequestDto extends StwMonitorDto {
 
+	@Override
+	public String toString() {
+		return "StwMonitorRequestDto [clientIP=" + clientIP + ", clientHost=" + clientHost + "]";
+	}
 	private String clientIP;
 	private String clientHost;
-
 	@Generated("SparkTools")
 	private StwMonitorRequestDto(Builder builder) {
 		this.hostName = builder.hostName;
@@ -19,10 +24,10 @@ public class StwMonitorRequestDto extends StwMonitorDto {
 		this.sessionId = builder.sessionId;
 		this.pathServico = builder.pathServico;
 		this.method = builder.method;
+		this.status = builder.status;
 		this.clientIP = builder.clientIP;
 		this.clientHost = builder.clientHost;
 	}
-	
 	public String getClientIP() {
 		return clientIP;
 	}
@@ -53,6 +58,7 @@ public class StwMonitorRequestDto extends StwMonitorDto {
 		private String sessionId;
 		private String pathServico;
 		private String method;
+		private HttpStatus status;
 		private String clientIP;
 		private String clientHost;
 
@@ -84,6 +90,11 @@ public class StwMonitorRequestDto extends StwMonitorDto {
 			return this;
 		}
 
+		public Builder withStatus(HttpStatus status) {
+			this.status = status;
+			return this;
+		}
+
 		public Builder withClientIP(String clientIP) {
 			this.clientIP = clientIP;
 			return this;
@@ -98,5 +109,6 @@ public class StwMonitorRequestDto extends StwMonitorDto {
 			return new StwMonitorRequestDto(this);
 		}
 	}
-		
+
+	
 }

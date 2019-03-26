@@ -10,16 +10,6 @@ import javax.annotation.Generated;
  */
 public class StwMonitorResponseDto extends StwMonitorDto {
 
-	private HttpStatus status;
-
-	public HttpStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(HttpStatus status) {
-		this.status = status;
-	}
-
 	@Generated("SparkTools")
 	private StwMonitorResponseDto(Builder builder) {
 		this.hostName = builder.hostName;

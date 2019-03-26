@@ -57,8 +57,8 @@ public class ResponseErrorHandler<T> implements ResponseBodyAdvice<Object> {
 					HttpStatus.valueOf(servletResponse.getStatus()));
 
 		} catch (Exception e) {
-//			log.warn("Erro ao processar response para URL: {}", request.getURI().toString());
-			log.error("Erro ao processar response para URL:", e);
+			log.warn("Erro ao processar response para URL: {}", request.getURI().toString());
+			log.debug("Erro ao processar response para URL:", e);
 		}
 		return body;
 	}

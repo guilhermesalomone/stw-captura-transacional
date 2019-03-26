@@ -55,8 +55,8 @@ public class ResponseSuccessHandler implements ResponseBodyAdvice<Object> {
 	    	server.enviarResponse(request.getURI().toString(), request.getLocalAddress().getHostString(), request.getMethodValue(), HttpStatus.valueOf(servletResponse.getStatus()));
 	    	
 		} catch (Exception e) {
-//			log.warn("Erro ao processar response para URL: {}", request.getURI().toString());
-			log.error("Erro ao processar response para URL:", e);
+			log.warn("Erro ao processar response para URL: {}", request.getURI().toString());
+			log.debug("Erro ao processar response para URL:", e);
 		}
 		
         return body;

@@ -22,8 +22,14 @@ LIB responsavel por interceptar qualquer requisicao e enviar para uma fila onde 
 	
 ##### Adicionar no properties do projeto as variáveis que serão utilizados pela lib para identificar o projeto.
 
+> Em YAML
 
 ``` sh
+ 
+
+spring:
+  application:
+    name: conector-teste
  
 ######################################################
 #
@@ -47,8 +53,38 @@ task-executor:
 server-logger:
   url-request: http://localhost:8081/api/logger-request
   url-response: http://localhost:8081/api/logger-response
+  url-management-health: http://localhost:8081/management/health
   version: v1  	
   
+```
+	
+> Em Properties
+
+``` sh
+	
+spring.application.name= conector-teste
+  
+######################################################
+#
+# Configuracao do Inicializador de Threads task-executo
+#
+#
+#
+#####################################################
+task-executor.core-pool-size= 100
+task-executor.max-pool-size= 1000
+task-executor.queue-capacity= 1000
+
+######################################################
+#
+# Configuracao API Interceptor
+#
+######################################################
+server-logger.url-request= http://localhost:8081/api/captura-dados/logger-request
+server-logger.url-response= http://localhost:8081/api/captura-dados/logger-response
+server-logger.version= v1 	
+	
+
 ```
 	
 > Os dados devem ser substituídos conforme os projetos em que serão aplicados.
@@ -58,9 +94,18 @@ server-logger:
 
 ``` sh
 
+
+/**
+ * 
+ * @author Guilherme.Salomone
+ *
+ */
 @Configuration
-@ComponentScan(basePackageClasses = {AnalyticsAdapterInit.class})
-public class AnalyticsInterceptorConfiguration {
+@ComponentScan(basePackageClasses = {CapturaTransacionalInit.class})
+public class CapturaTransacionalConfiguration {
+
+
+	private static final String SERVER_LOGGER_URL_MANAGEMENT_HEALTH = "server-logger.url-management-health";
 
 	private static final String SERVER_LOGGER_VERSION = "server-logger.version";
 
@@ -73,13 +118,14 @@ public class AnalyticsInterceptorConfiguration {
 	private Environment env;
 	
 	@Bean
-	public AnalyticsProperties analyticsProperties() {
+	public CapturaTransacionalProperties analyticsProperties() {
 		
-		return AnalyticsProperties.builder()
+		return CapturaTransacionalProperties.builder()
 				.withName(env.getProperty(SPRING_APPLICATION_NAME))
 				.withApiVersion(env.getProperty(SERVER_LOGGER_VERSION))
 				.withUrlServerRequestLogger(env.getProperty(SERVER_LOGGER_REQUEST_URL))
 				.withUrlServerResponseLogger(env.getProperty(SERVER_LOGGER_RESPONSE_URL))
+				.withUrlServerManagementHealth(env.getProperty(SERVER_LOGGER_URL_MANAGEMENT_HEALTH))
 				.build();
 	}
 }

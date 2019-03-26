@@ -13,6 +13,8 @@ public class CapturaTransacionalProperties {
 	private String name;
 	private String urlServerRequestLogger;
 	private String urlServerResponseLogger;
+	private String urlServerManagementHealth;
+
 
 
 	@Generated("SparkTools")
@@ -21,7 +23,9 @@ public class CapturaTransacionalProperties {
 		this.name = builder.name;
 		this.urlServerRequestLogger = builder.urlServerRequestLogger;
 		this.urlServerResponseLogger = builder.urlServerResponseLogger;
+		this.urlServerManagementHealth = builder.urlServerManagementHealth;
 	}
+
 
 	
 	public String getApiVersion() {
@@ -48,6 +52,12 @@ public class CapturaTransacionalProperties {
 	public void setUrlServerResponseLogger(String urlServerResponseLogger) {
 		this.urlServerResponseLogger = urlServerResponseLogger;
 	}
+	public String getUrlServerManagementHealth() {
+		return urlServerManagementHealth;
+	}
+	public void setUrlServerManagementHealth(String urlServerManagementHealth) {
+		this.urlServerManagementHealth = urlServerManagementHealth;
+	}
 	/**
 	 * Creates builder to build {@link CapturaTransacionalProperties}.
 	 * @return created builder
@@ -65,6 +75,7 @@ public class CapturaTransacionalProperties {
 		private String name;
 		private String urlServerRequestLogger;
 		private String urlServerResponseLogger;
+		private String urlServerManagementHealth;
 
 		private Builder() {
 		}
@@ -86,6 +97,11 @@ public class CapturaTransacionalProperties {
 
 		public Builder withUrlServerResponseLogger(String urlServerResponseLogger) {
 			this.urlServerResponseLogger = urlServerResponseLogger;
+			return this;
+		}
+
+		public Builder withUrlServerManagementHealth(String urlServerManagementHealth) {
+			this.urlServerManagementHealth = urlServerManagementHealth;
 			return this;
 		}
 

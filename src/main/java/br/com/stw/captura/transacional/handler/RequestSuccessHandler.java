@@ -2,7 +2,6 @@ package br.com.stw.captura.transacional.handler;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +32,6 @@ public class RequestSuccessHandler extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
-		addToModelUserDetails(request.getSession());
 		server.enviarRequest(request.getRequestURL().toString(), request.getSession().getId(), request.getMethod(),
 				request.getRemoteAddr(), request.getRemoteHost());
 
@@ -47,10 +45,4 @@ public class RequestSuccessHandler extends HandlerInterceptorAdapter {
 		log.debug("Request Finished");
 	}
 
-	private void addToModelUserDetails(HttpSession session) {
-		log.debug("=============== addToModelUserDetails =========================");
-
-		log.debug(" session : " + session.getId());
-		log.debug("=============== addToModelUserDetails =========================");
-	}
 }

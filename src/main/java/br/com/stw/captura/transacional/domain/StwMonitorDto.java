@@ -1,5 +1,7 @@
 package br.com.stw.captura.transacional.domain;
 
+import org.springframework.http.HttpStatus;
+
 /**
  * 
  * @author Guilherme.Salomone
@@ -13,7 +15,16 @@ public abstract class StwMonitorDto {
 	protected String sessionId;
 	protected String pathServico;
 	protected String method;
+	protected HttpStatus status;
 
+	public HttpStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(HttpStatus status) {
+		this.status = status;
+	}
+	
 	public String getHostName() {
 		return hostName;
 	}
