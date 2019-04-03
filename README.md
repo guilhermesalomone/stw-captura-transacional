@@ -56,6 +56,22 @@ server-logger:
   url-management-health: http://localhost:8081/management/health
   version: v1  	
   
+  
+######################################################
+#
+# Configuracao API Interceptor Para indicar qual servidor 
+# de Mensageria RabbitMQ
+# 
+#
+###################################################### 
+spring:
+    rabbitmq:
+        host: localhost
+        port: 5672
+        username: guest
+        password: guest  
+  
+  
 ```
 	
 > Em Properties
@@ -84,6 +100,19 @@ server-logger.url-request= http://localhost:8081/api/captura-dados/logger-reques
 server-logger.url-response= http://localhost:8081/api/captura-dados/logger-response
 server-logger.version= v1 	
 	
+
+  
+######################################################
+#
+# Configuracao API Interceptor Para indicar qual servidor 
+# de Mensageria RabbitMQ
+# 
+#
+###################################################### 
+spring.rabbitmq.host= localhost
+spring.rabbitmq.port= 5672
+spring.rabbitmq.username= guest
+spring.rabbitmq.password= guest 
 
 ```
 	

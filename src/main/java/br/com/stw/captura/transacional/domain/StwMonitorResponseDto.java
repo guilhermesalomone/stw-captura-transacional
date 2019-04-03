@@ -10,6 +10,11 @@ import javax.annotation.Generated;
  */
 public class StwMonitorResponseDto extends StwMonitorDto {
 
+	
+	public StwMonitorResponseDto() {
+		super();
+	}
+
 	@Generated("SparkTools")
 	private StwMonitorResponseDto(Builder builder) {
 		this.hostName = builder.hostName;

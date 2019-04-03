@@ -2,8 +2,6 @@ package br.com.stw.captura.transacional.handler;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,8 +12,8 @@ import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-import br.com.stw.captura.transacional.client.CapturaTransacionalClient;
 import br.com.stw.captura.transacional.handler.exception.ErrorMessage;
+import br.com.stw.captura.transacional.web.client.CapturaTransacionalClient;
 
 /**
  * 
@@ -24,15 +22,13 @@ import br.com.stw.captura.transacional.handler.exception.ErrorMessage;
  * @param <T>
  */
 @ControllerAdvice
-public class ResponseErrorHandler<T> implements ResponseBodyAdvice<Object> {
+public class ResponseErrorHandler implements ResponseBodyAdvice<Object> {
 
-	private static Logger log = LoggerFactory.getLogger(ResponseErrorHandler.class);
+	private final CapturaTransacionalClient service;
 	
-	private final CapturaTransacionalClient server;
-
-	public ResponseErrorHandler(CapturaTransacionalClient server) {
+	public ResponseErrorHandler(CapturaTransacionalClient service) {
 		super();
-		this.server = server;
+		this.service = service;
 	}
 
 	@Override
@@ -50,16 +46,11 @@ public class ResponseErrorHandler<T> implements ResponseBodyAdvice<Object> {
 			final MediaType selectedContentType, final Class<? extends HttpMessageConverter<?>> selectedConverterType,
 			final ServerHttpRequest request, final ServerHttpResponse response) {
 
-		try {
+		final HttpServletResponse servletResponse = ((ServletServerHttpResponse) response).getServletResponse();
+		
+		service.enviarResponse(request.getURI().toString(), request.getLocalAddress().getHostString(),
+				request.getMethodValue(), HttpStatus.valueOf(servletResponse.getStatus()));
 
-			final HttpServletResponse servletResponse = ((ServletServerHttpResponse) response).getServletResponse();
-			server.enviarResponse(request.getURI().toString(), request.getLocalAddress().getHostString(), request.getMethodValue(), 
-					HttpStatus.valueOf(servletResponse.getStatus()));
-
-		} catch (Exception e) {
-			log.warn("Erro ao processar response para URL: {}", request.getURI().toString());
-			log.debug("Erro ao processar response para URL:", e);
-		}
 		return body;
 	}
 

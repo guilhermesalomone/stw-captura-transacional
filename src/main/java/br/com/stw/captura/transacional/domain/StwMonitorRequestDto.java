@@ -11,10 +11,23 @@ import org.springframework.http.HttpStatus;
  */
 public class StwMonitorRequestDto extends StwMonitorDto {
 
+	
+	public StwMonitorRequestDto() {
+		super();
+	}
+
+
+	
 	@Override
 	public String toString() {
-		return "StwMonitorRequestDto [clientIP=" + clientIP + ", clientHost=" + clientHost + "]";
+		return "StwMonitorRequestDto [clientIP=" + clientIP + ", clientHost=" + clientHost + ", hostName=" + hostName
+				+ ", apiVersion=" + apiVersion + ", sessionId=" + sessionId + ", pathServico=" + pathServico
+				+ ", method=" + method + ", status=" + status + "]";
 	}
+
+
+
+
 	private String clientIP;
 	private String clientHost;
 	@Generated("SparkTools")

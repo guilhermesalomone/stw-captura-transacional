@@ -12,7 +12,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import br.com.stw.captura.transacional.config.prop.CapturaTransacionalProperties;
 
 
-
+/**
+ * 
+ * @author Guilherme.Salomone
+ *
+ */
 public class ErrorMessage {
 
 	private static final Logger log = LoggerFactory.getLogger(ErrorMessage.class);

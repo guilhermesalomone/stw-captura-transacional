@@ -45,7 +45,7 @@ public class HealthServerIndicator {
         this.ativo = false;
     }
 
-	public Boolean isAtivo() {
-		return ativo;
+	public Boolean indisponivel() {
+		return !ativo;
 	}
 }

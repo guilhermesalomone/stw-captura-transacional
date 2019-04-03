@@ -11,3 +11,9 @@ task-executor:
     max-pool-size: 100
     queue-capacity: 100
 
+spring:
+    rabbitmq:
+        host: localhost
+        port: 5672
+        username: guest
+        password: guest
