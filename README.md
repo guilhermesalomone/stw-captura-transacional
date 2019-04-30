@@ -6,13 +6,18 @@ LIB responsavel por interceptar qualquer requisicao e enviar para uma fila onde 
 
 ### Pre-requisitos
 
-##### Adicionar a dependência no pom do projeto.
+##### Adicionar a dependï¿½ncia no pom do projeto.
 
 ``` sh	
+	<parent>
+		<groupId>br.com.claro.stw</groupId>
+		<artifactId>stw-dependencies</artifactId>
+		<version>1.0.0-RELEASE</version>
+	</parent>
+	
 	<dependency>
 		<groupId>br.com.analytics</groupId>
-		<artifactId>api-analytics-logger</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<artifactId>stw-captura</artifactId>
 	</dependency>
 ```
 > Verificar versionamento no artifactory. 
@@ -20,7 +25,7 @@ LIB responsavel por interceptar qualquer requisicao e enviar para uma fila onde 
 #### Configuracao do projeto	
 	
 	
-##### Adicionar no properties do projeto as variáveis que serão utilizados pela lib para identificar o projeto.
+##### Adicionar no properties do projeto as variï¿½veis que serï¿½o utilizados pela lib para identificar o projeto.
 
 > Em YAML
 
@@ -46,7 +51,7 @@ task-executor:
 ######################################################
 #
 # Configuracao API Interceptor Para indicar qual servidor 
-# e URL devera ser enviado as requisiçoes capturadas
+# e URL devera ser enviado as requisiï¿½oes capturadas
 # 
 #
 ######################################################
@@ -57,20 +62,7 @@ server-logger:
   version: v1  	
   
   
-######################################################
-#
-# Configuracao API Interceptor Para indicar qual servidor 
-# de Mensageria RabbitMQ
-# 
-#
-###################################################### 
-spring:
-    rabbitmq:
-        host: localhost
-        port: 5672
-        username: guest
-        password: guest  
-  
+
   
 ```
 	
@@ -102,24 +94,14 @@ server-logger.version= v1
 	
 
   
-######################################################
-#
-# Configuracao API Interceptor Para indicar qual servidor 
-# de Mensageria RabbitMQ
-# 
-#
-###################################################### 
-spring.rabbitmq.host= localhost
-spring.rabbitmq.port= 5672
-spring.rabbitmq.username= guest
-spring.rabbitmq.password= guest 
+
 
 ```
 	
-> Os dados devem ser substituídos conforme os projetos em que serão aplicados.
+> Os dados devem ser substituï¿½dos conforme os projetos em que serï¿½o aplicados.
 
 
-##### Criar classe de configuração para inicializar as propriedades da Lib.
+##### Criar classe de configuraï¿½ï¿½o para inicializar as propriedades da Lib.
 
 ``` sh
 

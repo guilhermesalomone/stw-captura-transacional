@@ -53,7 +53,9 @@ public class CapturaTransacionalClient {
 
 			final StwMonitorRequestDto request = StwMonitorRequestDto.builder().withHostName(properties.getName())
 					.withApiVersion(properties.getApiVersion()).withStatus(HttpStatus.CONTINUE)
-					.withPathServico(requestUrl).withMethod(method).withClientIP(clientIP).withClientHost(clientHost)
+					.withPathServico(requestUrl).withMethod(method).withClientIP(clientIP)
+					.withClientHost(clientHost)
+					.withParametros(parametros)
 					.withSessionId(sessionId).build();
 
 //			try {
@@ -62,7 +64,7 @@ public class CapturaTransacionalClient {
 //			} catch (Exception e) {
 //				log.warn("Connection refused: connect is Fila: {}", RabbitMQConfig.QUEUE_NAME_REQUEST);
 
-			enviarViaPost(request, StwMonitorRequestDto.class);
+			enviarViaPost(properties.getUrlServerRequestLogger(), request, StwMonitorRequestDto.class);
 
 //			}
 		} catch (Exception e) {
@@ -71,6 +73,7 @@ public class CapturaTransacionalClient {
 
 		log.debug("Request Enviada");
 	}
+
 
 	public void enviarResponse(final String requestUrl, final String sessionId, final String method,
 			HttpStatus httpStatus) {
@@ -95,7 +98,7 @@ public class CapturaTransacionalClient {
 
 			log.warn("Connection refused: connect is Fila: {}", RabbitMQConfig.QUEUE_NAME_RESPONSE);
 
-			enviarViaPost(response, StwMonitorResponseDto.class);
+			enviarViaPost(properties.getUrlServerResponseLogger(), response, StwMonitorResponseDto.class);
 //			}
 
 		} catch (Exception e) {
@@ -106,9 +109,9 @@ public class CapturaTransacionalClient {
 
 	}
 
-	private <E> void enviarViaPost(final E object, final Class<?> clazz) {
+	private <E> void enviarViaPost(String urlServerLogger, final E object, final Class<?> clazz) {
 		final HttpEntity<E> responseHttp = new HttpEntity<>(object);
-		restTemplate.postForObject(properties.getUrlServerResponseLogger(), responseHttp, clazz);
+		restTemplate.postForObject(urlServerLogger, responseHttp, clazz);
 	}
-
+	
 }
