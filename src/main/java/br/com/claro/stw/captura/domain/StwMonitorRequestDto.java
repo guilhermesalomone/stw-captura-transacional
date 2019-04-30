@@ -11,12 +11,15 @@ import org.springframework.http.HttpStatus;
  */
 public class StwMonitorRequestDto extends StwMonitorDto {
 
+	private String clientIP;
+	private String clientHost;
 	
-	public StwMonitorRequestDto() {
-		super();
+	public String getClientIP() {
+		return clientIP;
 	}
-
-
+	public String getClientHost() {
+		return clientHost;
+	}
 	
 	@Override
 	public String toString() {
@@ -24,12 +27,7 @@ public class StwMonitorRequestDto extends StwMonitorDto {
 				+ ", apiVersion=" + apiVersion + ", sessionId=" + sessionId + ", pathServico=" + pathServico
 				+ ", method=" + method + ", status=" + status + "]";
 	}
-
-
-
-
-	private String clientIP;
-	private String clientHost;
+	
 	@Generated("SparkTools")
 	private StwMonitorRequestDto(Builder builder) {
 		this.hostName = builder.hostName;
@@ -37,21 +35,10 @@ public class StwMonitorRequestDto extends StwMonitorDto {
 		this.sessionId = builder.sessionId;
 		this.pathServico = builder.pathServico;
 		this.method = builder.method;
+		this.parametros = builder.parametros;
 		this.status = builder.status;
 		this.clientIP = builder.clientIP;
 		this.clientHost = builder.clientHost;
-	}
-	public String getClientIP() {
-		return clientIP;
-	}
-	public void setClientIP(String clientIP) {
-		this.clientIP = clientIP;
-	}
-	public String getClientHost() {
-		return clientHost;
-	}
-	public void setClientHost(String clientHost) {
-		this.clientHost = clientHost;
 	}
 	/**
 	 * Creates builder to build {@link StwMonitorRequestDto}.
@@ -71,6 +58,7 @@ public class StwMonitorRequestDto extends StwMonitorDto {
 		private String sessionId;
 		private String pathServico;
 		private String method;
+		private String parametros;
 		private HttpStatus status;
 		private String clientIP;
 		private String clientHost;
@@ -103,6 +91,11 @@ public class StwMonitorRequestDto extends StwMonitorDto {
 			return this;
 		}
 
+		public Builder withParametros(String parametros) {
+			this.parametros = parametros;
+			return this;
+		}
+
 		public Builder withStatus(HttpStatus status) {
 			this.status = status;
 			return this;
@@ -122,6 +115,8 @@ public class StwMonitorRequestDto extends StwMonitorDto {
 			return new StwMonitorRequestDto(this);
 		}
 	}
-
 	
+
+
+
 }

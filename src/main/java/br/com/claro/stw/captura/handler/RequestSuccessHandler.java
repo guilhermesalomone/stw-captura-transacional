@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import br.com.claro.stw.captura.handler.utils.ParametersUtil;
 import br.com.claro.stw.captura.web.client.CapturaTransacionalClient;
 
 /**
@@ -31,8 +32,11 @@ public class RequestSuccessHandler extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
+		log.info("[preHandle][" + request + "]" + "[" + request.getMethod()
+	      + "]" + request.getRequestURI() + ParametersUtil.get(request));
+		
 		service.enviarRequest(request.getRequestURL().toString(), request.getSession().getId(), request.getMethod(),
-				request.getRemoteAddr(), request.getRemoteHost());
+				request.getRemoteAddr(), request.getRemoteHost(), ParametersUtil.get(request));
 		return true;
 	}
 
@@ -43,4 +47,5 @@ public class RequestSuccessHandler extends HandlerInterceptorAdapter {
 		log.debug("Request Finished");
 	}
 
+	
 }

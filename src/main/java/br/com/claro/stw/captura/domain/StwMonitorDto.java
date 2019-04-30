@@ -15,45 +15,35 @@ public abstract class StwMonitorDto {
 	protected String sessionId;
 	protected String pathServico;
 	protected String method;
+	protected String parametros;
 	protected HttpStatus status;
 
-	public HttpStatus getStatus() {
-		return status;
+	protected StwMonitorDto() {
+		super();
 	}
 
-	public void setStatus(HttpStatus status) {
-		this.status = status;
-	}
+
 	
 	public String getHostName() {
 		return hostName;
 	}
-	public void setHostName(String hostName) {
-		this.hostName = hostName;
-	}
 	public String getApiVersion() {
 		return apiVersion;
-	}
-	public void setApiVersion(String apiVersion) {
-		this.apiVersion = apiVersion;
 	}
 	public String getSessionId() {
 		return sessionId;
 	}
-	public void setSessionId(String sessionId) {
-		this.sessionId = sessionId;
+	public String getPathServico() {
+		return pathServico;
 	}
 	public String getMethod() {
 		return method;
 	}
-	public void setMethod(String method) {
-		this.method = method;
+	public String getParametros() {
+		return parametros;
 	}
-	public String getPathServico() {
-		return pathServico;
-	}
-	public void setPathServico(String pathServico) {
-		this.pathServico = pathServico;
+	public HttpStatus getStatus() {
+		return status;
 	}
 	
 }
