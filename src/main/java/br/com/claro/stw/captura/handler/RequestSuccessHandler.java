@@ -23,7 +23,6 @@ public class RequestSuccessHandler extends HandlerInterceptorAdapter {
 
 	private final CapturaTransacionalClient service;
 
-
 	public RequestSuccessHandler(CapturaTransacionalClient service) {
 		super();
 		this.service = service;
@@ -32,14 +31,15 @@ public class RequestSuccessHandler extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
 
-		log.info("[preHandle][" + request + "]" + "[" + request.getMethod()
-	      + "]" + request.getRequestURI() + ParametersUtil.get(request));
+		log.info("[preHandle][" + request + "]" + "[" + request.getMethod() + "]" + request.getRequestURI());
 		
 		service.enviarRequest(request.getRequestURL().toString(), request.getSession().getId(), request.getMethod(),
-				request.getRemoteAddr(), request.getRemoteHost(), ParametersUtil.get(request));
+				request.getRemoteAddr(), request.getRemoteHost(),
+				ParametersUtil.get(request));
+		
 		return true;
 	}
-
+	
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception ex) {
@@ -47,5 +47,4 @@ public class RequestSuccessHandler extends HandlerInterceptorAdapter {
 		log.debug("Request Finished");
 	}
 
-	
 }
